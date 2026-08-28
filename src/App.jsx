@@ -14,7 +14,6 @@ export default function App() {
   const [activeCard, setActiveCard] = useState(null);
   const [filterType, setFilterType] = useState('All');
 
-  // PHASE 3: Synchronize row selection to Active Item Detail Card[cite: 1]
   useEffect(() => {
     if (selectedItem) {
       setActiveCard(selectedItem);
@@ -33,7 +32,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-slate-900 p-6 md:p-12 text-slate-100">
-      {/* Header */}
       <header className="max-w-6xl mx-auto mb-8 border-b border-slate-800 pb-4 flex justify-between items-end">
         <div>
           <div className="flex items-center space-x-2">
@@ -46,16 +44,12 @@ export default function App() {
         </div>
       </header>
 
-      {/* Main Content Layout */}
       <main className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Left Column: Form */}
         <section className="lg:col-span-1">
           <GuitarForm onAddItem={handleAddItem} />
         </section>
 
-        {/* Right Column: Table and Active Detail Sync */}
         <section className="lg:col-span-2 space-y-6">
-          {/* Category Filter */}
           <div className="bg-slate-800 p-4 rounded-xl border border-slate-700 shadow-md flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">Filter Body Type:</span>
             <div className="flex gap-1.5 overflow-x-auto">
@@ -75,14 +69,12 @@ export default function App() {
             </div>
           </div>
 
-          {/* TanStack Table */}
           <GuitarTable
             data={filteredItems}
             onSelectRow={(item) => setSelectedItem(item)}
             selectedId={selectedItem?.id}
           />
 
-          {/* Active Profile Card (Synced via useEffect)[cite: 1] */}
           {activeCard ? (
             <div className="bg-slate-800 p-6 rounded-xl border-l-4 border-amber-500 shadow-xl border-y border-r border-slate-700 space-y-4">
               <div className="flex justify-between items-start">
