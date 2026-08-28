@@ -2,9 +2,11 @@ import React, { useMemo } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
-  getPaginationRowModel,
   flexRender
 } from '@tanstack/react-table';
+
+// Subpath import bypasses bundler tree-shaking export issues on Vercel
+import { getPaginationRowModel } from '@tanstack/table-core';
 
 export default function GuitarTable({ data, onSelectRow, selectedId }) {
   const columns = useMemo(() => [
@@ -34,6 +36,7 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
         <span className="text-xs text-slate-400 font-mono">{data ? data.length : 0} total guitars</span>
       </div>
 
+      {/* Table Area */}
       <div className="overflow-x-auto rounded-lg border border-slate-700">
         <table className="w-full text-left text-sm">
           <thead className="bg-slate-900 text-slate-400 font-mono text-xs uppercase tracking-wider">
@@ -80,12 +83,13 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
         </table>
       </div>
 
+      {/* Pagination Controls */}
       <div className="flex items-center justify-between pt-2">
         <button
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
           type="button"
-          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition"
+          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition cursor-pointer"
         >
           ← Previous
         </button>
@@ -98,7 +102,7 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
           type="button"
-          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition"
+          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition cursor-pointer"
         >
           Next →
         </button>
