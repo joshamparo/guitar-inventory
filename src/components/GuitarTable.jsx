@@ -1,13 +1,16 @@
 import React, { useMemo } from 'react';
-import {
-  useReactTable,
-  getCoreRowModel,
-  getPaginationRowModel,
-  flexRender
-} from '@tanstack/react-table';
+import * as TanStackTable from '@tanstack/react-table';
 
 // Table component displaying registered guitars with pagination[cite: 1]
 export default function GuitarTable({ data, onSelectRow, selectedId }) {
+  // Destructure functions from module namespace to ensure proper resolution in build environments
+  const {
+    useReactTable,
+    getCoreRowModel,
+    getPaginationRowModel,
+    flexRender
+  } = TanStackTable;
+
   // Define table headers
   const columns = useMemo(() => [
     { header: 'Model', accessorKey: 'model' },

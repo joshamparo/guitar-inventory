@@ -7,7 +7,7 @@ export default function GuitarForm({ onAddItem }) {
     model: '',
     bodyType: 'Electric',
     brand: '',
-    stock: '',  
+    stock: '',
     manufacturer: '',
     userRole: 'Merchant'
   });
