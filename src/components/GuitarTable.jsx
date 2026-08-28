@@ -1,16 +1,13 @@
 import React, { useMemo } from 'react';
-import * as TanStackTable from '@tanstack/react-table';
+import {
+  useReactTable,
+  getCoreRowModel,
+  getPaginationRowModel,
+  flexRender
+} from '@tanstack/react-table';
 
 // Table component displaying registered guitars with pagination[cite: 1]
 export default function GuitarTable({ data, onSelectRow, selectedId }) {
-  // Destructure functions from module namespace to ensure proper resolution in build environments
-  const {
-    useReactTable,
-    getCoreRowModel,
-    getPaginationRowModel,
-    flexRender
-  } = TanStackTable;
-
   // Define table headers
   const columns = useMemo(() => [
     { header: 'Model', accessorKey: 'model' },
@@ -22,7 +19,7 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
 
   // TanStack Table setup with 4 rows per page pagination[cite: 1]
   const table = useReactTable({
-    data,
+    data: data || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
@@ -37,7 +34,7 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
     <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl space-y-4 text-slate-100">
       <div className="flex items-center justify-between border-b border-slate-700 pb-3">
         <h2 className="text-lg font-bold tracking-wide uppercase text-amber-500">Inventory Registry</h2>
-        <span className="text-xs text-slate-400 font-mono">{data.length} total guitars</span>
+        <span className="text-xs text-slate-400 font-mono">{data ? data.length : 0} total guitars</span>
       </div>
 
       {/* Table Area */}
@@ -92,7 +89,8 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
         <button
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
-          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition"
+          type="button"
+          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition cursor-pointer"
         >
           ← Previous
         </button>
@@ -104,7 +102,8 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
         <button
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
-          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition"
+          type="button"
+          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition cursor-pointer"
         >
           Next →
         </button>
