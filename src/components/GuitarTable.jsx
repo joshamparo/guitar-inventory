@@ -6,9 +6,7 @@ import {
   flexRender
 } from '@tanstack/react-table';
 
-// Table component displaying registered guitars with pagination[cite: 1]
 export default function GuitarTable({ data, onSelectRow, selectedId }) {
-  // Define table headers
   const columns = useMemo(() => [
     { header: 'Model', accessorKey: 'model' },
     { header: 'Brand', accessorKey: 'brand' },
@@ -17,7 +15,6 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
     { header: 'Role', accessorKey: 'userRole' }
   ], []);
 
-  // TanStack Table setup with 4 rows per page pagination[cite: 1]
   const table = useReactTable({
     data: data || [],
     columns,
@@ -37,7 +34,6 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
         <span className="text-xs text-slate-400 font-mono">{data ? data.length : 0} total guitars</span>
       </div>
 
-      {/* Table Area */}
       <div className="overflow-x-auto rounded-lg border border-slate-700">
         <table className="w-full text-left text-sm">
           <thead className="bg-slate-900 text-slate-400 font-mono text-xs uppercase tracking-wider">
@@ -84,13 +80,12 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
         </table>
       </div>
 
-      {/* Pagination Controls[cite: 1] */}
       <div className="flex items-center justify-between pt-2">
         <button
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
           type="button"
-          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition cursor-pointer"
+          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition"
         >
           ← Previous
         </button>
@@ -103,7 +98,7 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
           type="button"
-          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition cursor-pointer"
+          className="px-3 py-1.5 bg-slate-700 hover:bg-slate-600 disabled:opacity-40 rounded text-xs font-semibold text-slate-300 transition"
         >
           Next →
         </button>
