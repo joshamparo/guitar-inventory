@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 
-// Guitar Form Component with validation and guitar-themed UI styling
+// PHASE 1 NAMAN TOOO
 export default function GuitarForm({ onAddItem }) {
-  // Local state for input fields
   const [formData, setFormData] = useState({
     model: '',
     bodyType: 'Electric',
@@ -12,31 +11,30 @@ export default function GuitarForm({ onAddItem }) {
     userRole: 'Merchant'
   });
 
-  // Local state for tracking validation error messages
+  
   const [errors, setErrors] = useState({});
 
-  // Inline Validation Function[cite: 1]
   const validateForm = () => {
     let newErrors = {};
 
-    // Validate Model: minimum 3 characters[cite: 1]
+    
     if (!formData.model.trim()) {
       newErrors.model = 'Guitar model is required.';
     } else if (formData.model.trim().length < 3) {
       newErrors.model = 'Model must be at least 3 characters.';
     }
 
-    // Validate Brand Name[cite: 1]
+   
     if (!formData.brand.trim()) {
       newErrors.brand = 'Brand name is required.';
     }
 
-    // Validate Manufacturer Name[cite: 1]
+  
     if (!formData.manufacturer.trim()) {
       newErrors.manufacturer = 'Manufacturer name is required.';
     }
 
-    // Validate Stock Quantity: number between 1 and 100[cite: 1]
+    
     const stockNumber = Number(formData.stock);
     if (!formData.stock) {
       newErrors.stock = 'Stock quantity is required.';
@@ -48,7 +46,7 @@ export default function GuitarForm({ onAddItem }) {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Submit Handler
+  
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -63,7 +61,7 @@ export default function GuitarForm({ onAddItem }) {
         userRole: formData.userRole
       });
 
-      // Clear input fields
+      
       setFormData({
         model: '',
         bodyType: 'Electric',
