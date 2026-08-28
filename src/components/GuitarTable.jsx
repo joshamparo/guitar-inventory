@@ -2,13 +2,13 @@ import React, { useMemo } from 'react';
 import {
   useReactTable,
   getCoreRowModel,
+  getPaginationRowModel,
   flexRender
 } from '@tanstack/react-table';
 
-// Subpath import bypasses bundler tree-shaking export issues on Vercel
-import { getPaginationRowModel } from '@tanstack/table-core';
-
+// Table component displaying registered guitars with pagination[cite: 1]
 export default function GuitarTable({ data, onSelectRow, selectedId }) {
+  // Define table headers
   const columns = useMemo(() => [
     { header: 'Model', accessorKey: 'model' },
     { header: 'Brand', accessorKey: 'brand' },
@@ -17,6 +17,7 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
     { header: 'Role', accessorKey: 'userRole' }
   ], []);
 
+  // TanStack Table setup with 4 rows per page pagination[cite: 1]
   const table = useReactTable({
     data: data || [],
     columns,
@@ -83,7 +84,7 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
         </table>
       </div>
 
-      {/* Pagination Controls */}
+      {/* Pagination Controls[cite: 1] */}
       <div className="flex items-center justify-between pt-2">
         <button
           onClick={() => table.previousPage()}
