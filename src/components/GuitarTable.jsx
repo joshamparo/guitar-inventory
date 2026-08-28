@@ -6,7 +6,7 @@ import {
   flexRender
 } from '@tanstack/react-table';
 
-// Table component displaying registered guitars using BUILT-IN TanStack Table Pagination
+// PHASE 2 NAMAN TOOO!
 export default function GuitarTable({ data = [], onSelectRow, selectedId }) {
   // Define table headers
   const columns = useMemo(() => [
@@ -17,7 +17,7 @@ export default function GuitarTable({ data = [], onSelectRow, selectedId }) {
     { header: 'Role', accessorKey: 'userRole' }
   ], []);
 
-  // TanStack Table Instance using built-in getPaginationRowModel[cite: 1]
+  
   const table = useReactTable({
     data,
     columns,
@@ -25,7 +25,7 @@ export default function GuitarTable({ data = [], onSelectRow, selectedId }) {
     getPaginationRowModel: typeof getPaginationRowModel === 'function' ? getPaginationRowModel() : undefined,
     initialState: {
       pagination: {
-        pageSize: 4 // Set 4 rows per page requirement[cite: 1]
+        pageSize: 4 
       }
     }
   });
