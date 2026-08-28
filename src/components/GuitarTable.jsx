@@ -6,8 +6,8 @@ import {
   flexRender
 } from '@tanstack/react-table';
 
-// Table component displaying registered guitars with pagination[cite: 1]
-export default function GuitarTable({ data, onSelectRow, selectedId }) {
+// Table component displaying registered guitars using BUILT-IN TanStack Table Pagination
+export default function GuitarTable({ data = [], onSelectRow, selectedId }) {
   // Define table headers
   const columns = useMemo(() => [
     { header: 'Model', accessorKey: 'model' },
@@ -17,15 +17,15 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
     { header: 'Role', accessorKey: 'userRole' }
   ], []);
 
-  // TanStack Table setup with 4 rows per page pagination[cite: 1]
+  // TanStack Table Instance using built-in getPaginationRowModel[cite: 1]
   const table = useReactTable({
-    data: data || [],
+    data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
+    getPaginationRowModel: typeof getPaginationRowModel === 'function' ? getPaginationRowModel() : undefined,
     initialState: {
       pagination: {
-        pageSize: 4
+        pageSize: 4 // Set 4 rows per page requirement[cite: 1]
       }
     }
   });
@@ -34,7 +34,7 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
     <div className="bg-slate-800 p-6 rounded-xl border border-slate-700 shadow-xl space-y-4 text-slate-100">
       <div className="flex items-center justify-between border-b border-slate-700 pb-3">
         <h2 className="text-lg font-bold tracking-wide uppercase text-amber-500">Inventory Registry</h2>
-        <span className="text-xs text-slate-400 font-mono">{data ? data.length : 0} total guitars</span>
+        <span className="text-xs text-slate-400 font-mono">{data.length} total guitars</span>
       </div>
 
       {/* Table Area */}
@@ -84,7 +84,7 @@ export default function GuitarTable({ data, onSelectRow, selectedId }) {
         </table>
       </div>
 
-      {/* Pagination Controls[cite: 1] */}
+      {/* Built-in TanStack Table Pagination Controls[cite: 1] */}
       <div className="flex items-center justify-between pt-2">
         <button
           onClick={() => table.previousPage()}
